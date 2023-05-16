@@ -4,7 +4,205 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Weather App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
   </head>
-  <body></body>
+
+  <body>
+    <div class="container">
+      <form id="searchForm">
+        <div class="input-group mb-3 mt-4">
+          <input
+            type="text"
+            class="form-control"
+            id="citySearchBar"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="basic-addon1"
+          />
+          <button
+            class="btn btn-outline-secondary"
+            type="submit"
+            id="searchButton"
+          >
+            Search
+          </button>
+        </div>
+      </form>
+
+      <div class="city-date">
+        <h2 class="location" id="locationName">
+          Concepción del Uruguay, Entre Ríos, Argentina
+        </h2>
+        <h3 class="date" id="dateTime">16:00 Monday, March 20, 2023</h3>
+      </div>
+
+      <div class="row gx-2">
+        <div class="col-8">
+          <div class="card w-100">
+            <div class="card-body">
+              <h5 class="card-title title-1">
+                Current weather<span class="units">
+                  <a href="#" id="celsiusTemp">°C</a> |
+                  <a href="#" id="fahrenheitTemp">°F</a>
+                </span>
+              </h5>
+              <div class="row">
+                <div class="col-3 card-subtitle first" id="temperature">
+                  🌥 25 C°
+                </div>
+                <div class="col-9">
+                  <div class="row" id="humidity">Humidity</div>
+                  <div class="row" id="wind">Wind</div>
+                </div>
+                <div class="weather-details">
+                  <div class="description" id="description">
+                    Expected scaterred rain showers
+                  </div>
+                  <div class="min-max">Mín. 18°C - Máx. 28°C</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="card w-100 h-100">
+            <div class="card-body">
+              <h5 class="card-title title-1">Tonight</h5>
+              <div class="row">
+                <div class="col-5 card-subtitle second">🌧 17 C°</div>
+                <div class="col-7">
+                  <div class="row-2">Rain showers</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-items-start mt-3 gx-2">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Tue 21</h5>
+              <div class="container-2">
+                <div class="row">
+                  <div class="col-4 emoji">🌧</div>
+                  <div class="col-8">
+                    <div class="row">22°C</div>
+                    <div class="row">17°C</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Wed 22</h5>
+              <div class="container-2">
+                <div class="row">
+                  <div class="col-4 emoji">🌩</div>
+                  <div class="col-8">
+                    <div class="row">25°C</div>
+                    <div class="row">20°C</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Thu 23</h5>
+              <div class="container-2">
+                <div class="row">
+                  <div class="col-4 emoji">🌧</div>
+                  <div class="col-8">
+                    <div class="row">25°C</div>
+                    <div class="row">19°C</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Fri 24</h5>
+              <div class="container-2">
+                <div class="row">
+                  <div class="col-4 emoji">🌧</div>
+                  <div class="col-8">
+                    <div class="row">23°C</div>
+                    <div class="row">17°C</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Sat 25</h5>
+              <div class="container-2">
+                <div class="row">
+                  <div class="col-4 emoji">⛅</div>
+                  <div class="col-8">
+                    <div class="row">22°C</div>
+                    <div class="row">16°C</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Sun 26</h5>
+              <div class="container-2">
+                <div class="row">
+                  <div class="col-4 emoji">🌤</div>
+                  <div class="col-8">
+                    <div class="row">23°C</div>
+                    <div class="row">17°C</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Mon 27</h5>
+              <div class="container-2">
+                <div class="row">
+                  <div class="col-4 emoji">☀</div>
+                  <div class="col-8">
+                    <div class="row">25°C</div>
+                    <div class="row">13°C</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
