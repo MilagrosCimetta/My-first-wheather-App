@@ -51,7 +51,8 @@ window.onload = function () {
 
 //tarea ahora
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = "";
@@ -68,20 +69,26 @@ function displayForecast() {
 					 <div class="row">
 						 <div class="col-4 emoji">🌧</div>
 						 <div class="col-8">
-							 <div class="row">22°C</div>
-							 <div class="row">17°C</div>
+						 <div class="row">22°C</div>
+						 <div class="row">17°C</div>
 						 </div>
 					 </div>
 				 </div>
-			 </div>
-		 </div>
-	 </div> 
-	 `;
+				 </div>
+				 </div>
+				 </div> 
+				 `;
   });
   forecastElement.innerHTML = forecastHTML;
 }
 
-displayForecast();
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "4b3503b2f08a729413c4d33ef1186004";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
+}
 
 function changeCityNameValue() {
   let city = document.getElementById("citySearchBar");
@@ -96,6 +103,7 @@ function searchCity(event) {
   let city = document.getElementById("citySearchBar");
   let apiKey = "4b3503b2f08a729413c4d33ef1186004";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${apiKey}&units=metric`;
+  //https://api.openweathermap.org/data/2.5/weather?q=london&appid=4b3503b2f08a729413c4d33ef1186004&units=metric
 
   axios
     .get(apiUrl)
@@ -118,6 +126,7 @@ function updateWeather(data) {
   changeCityNameValue();
   showWind(wind);
   showHumidity(humidity);
+  getForecast(info.data.coord);
 }
 
 function showHumidity(humidityChanges) {
