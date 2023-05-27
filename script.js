@@ -53,8 +53,10 @@ window.onload = function () {
 
 function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
-  forecastElement.innerHTML = "Forecast";
+  forecastElement.innerHTML = "forecast";
 }
+
+displayForecast();
 
 function changeCityNameValue() {
   let city = document.getElementById("citySearchBar");
@@ -91,7 +93,6 @@ function updateWeather(data) {
   changeCityNameValue();
   showWind(wind);
   showHumidity(humidity);
-  displayForecast();
 }
 
 function showHumidity(humidityChanges) {
