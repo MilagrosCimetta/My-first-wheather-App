@@ -51,26 +51,38 @@ window.onload = function () {
 
 //tarea ahora
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 function displayForecast(response) {
   console.log(response.data.daily);
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = "";
-  let forecastDays = ["Tue", "Wed", "Thu", "Fri"];
-  forecastDays.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
 	 <div class="col">
 		 <div class="card">
 			 <div class="card-body">
-				 <h5 class="card-title">${day}</h5>
+				 <h5 class="card-title">${formatDay(forecastDay.dt)}</h5>
 				 <div class="container-2">
 					 <div class="row">
-						 <div class="col-4 emoji">🌧</div>
-						 <div class="col-8">
-						 <div class="row">22°C</div>
-						 <div class="row">17°C</div>
+						 <div class="col-6 emoji"><img src="http://openweathermap.org/img/wn/${
+               forecastDay.weather[0].icon
+             }@2x.png" alt="" width="42"/></div>
+						 <div class="col-6">
+						 <div class="row">${Math.round(forecastDay.temp.max)}°</div>
+						 <div class="row">${Math.round(forecastDay.temp.min)}°</div>
 						 </div>
 					 </div>
 				 </div>
@@ -78,6 +90,7 @@ function displayForecast(response) {
 				 </div>
 				 </div> 
 				 `;
+    }
   });
   forecastElement.innerHTML = forecastHTML;
 }
