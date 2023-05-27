@@ -53,7 +53,32 @@ window.onload = function () {
 
 function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
-  forecastElement.innerHTML = "forecast";
+
+  let forecastHTML = "";
+  let forecastDays = ["Tue", "Wed", "Thu", "Fri"];
+  forecastDays.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+	 <div class="col">
+		 <div class="card">
+			 <div class="card-body">
+				 <h5 class="card-title">${day}</h5>
+				 <div class="container-2">
+					 <div class="row">
+						 <div class="col-4 emoji">🌧</div>
+						 <div class="col-8">
+							 <div class="row">22°C</div>
+							 <div class="row">17°C</div>
+						 </div>
+					 </div>
+				 </div>
+			 </div>
+		 </div>
+	 </div> 
+	 `;
+  });
+  forecastElement.innerHTML = forecastHTML;
 }
 
 displayForecast();
