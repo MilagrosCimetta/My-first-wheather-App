@@ -51,6 +51,11 @@ window.onload = function () {
 
 //tarea ahora
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = "Forecast";
+}
+
 function changeCityNameValue() {
   let city = document.getElementById("citySearchBar");
   let cityName = document.getElementById("locationName");
@@ -86,6 +91,7 @@ function updateWeather(data) {
   changeCityNameValue();
   showWind(wind);
   showHumidity(humidity);
+  displayForecast();
 }
 
 function showHumidity(humidityChanges) {
